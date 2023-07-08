@@ -1,27 +1,24 @@
-/*module.exports = () => {
-  // ...
-};*/
+const { checkAbsolute, pathExists, getExtension, readFiles } = require('./data');
 
-const fs = require('fs');
-const path = require('path');
+function mdLinks(fp) {
+  return new Promise((resolve, reject) => {
+    const absolutePath = checkAbsolute(fp);
 
-//Read a file
-fs.readFile('testing_files/testing-links.md', 'utf8', (err, data) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(data);
-});
+    if (!pathExists(absolutePath)) {
+      reject('Path does not exist');
+      return;
+    }
 
-//Extension
-const filePath = 'testing_files/testing.html';
-const extension = path.extname(filePath);
-console.log(extension);
+    const fileExtension = getExtension(absolutePath);
+    if (fileExtension !== '.md') {
+      reject('File is not a Markdown file');
+      return;
+    } else if (fileExtension === '.md'){
+      resolve(readFiles(absolutePath));
+      return;
+    }
 
-//Read directory synchronous
-const files = fs.readdirSync('testing_files');
-console.log(files);
+  });
+}
 
-//Join paths
-const join = path.join('testing_files', 'testing-links.md');
-console.log(join);
+module.exports = { mdLinks };
