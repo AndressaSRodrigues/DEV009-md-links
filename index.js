@@ -14,7 +14,13 @@ function mdLinks(fp) {
       reject('File is not a Markdown file');
       return;
     } else if (fileExtension === '.md'){
-      resolve(readFiles(absolutePath));
+      readFiles(absolutePath).then((links) => {
+        if (links.length > 0) {
+          resolve(links);
+          } else {
+            reject('No links in the file.')
+          }
+      })
       return;
     }
 
