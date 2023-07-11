@@ -1,21 +1,17 @@
-const { getExtension, checkAbsolute } = require('../data.js');
+const { readFiles } = require('../data.js');
 const { mdLinks } = require('../index.js');
-const path = 'testing_files/testing-links.md';
-const noLinks = 'testing_files/test-nolinks.md';
-const empty = 'testing_files/test-empty.md';
+const path = 'testing_files\\testing-links.md';
+const noLinks = 'testing_files\\test-nolinks.md';
+const empty = 'testing_files\\test-empty.md';
 
 describe('mdLinks', () => {
 
-it('should be a function that returns a promise', () => {
+it('should be a function that resolves a promise', () => {
     expect (typeof mdLinks).toBe('function');
   })
 
   it('should return an error if the path does not exist', () => {
     return expect(mdLinks('path.md')).rejects.toBe('Path does not exist');
-  })
-
-  it('should throw an error if the file is not .md', () => {
-    return expect(mdLinks('testing_files/testing.html')).rejects.toEqual('File is not a Markdown file');
   })
 
   it('should throw an error message if there are no links in the file', () => {
@@ -46,4 +42,12 @@ it('should be a function that returns a promise', () => {
         }
       ])
   })
+});
+
+describe('readFiles', () => {
+
+it('should throw an error if the file is not .md', () => {
+  return expect(readFiles('testing_files/testing.html')).rejects.toEqual('Not Markdown file.');
+})
+
 });

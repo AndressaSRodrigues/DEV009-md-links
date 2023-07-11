@@ -2,13 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 function checkAbsolute(fp) {
-  let pathInput;
-  if (path.isAbsolute(fp)) {
-    return fp
-  } else {
-    pathInput = path.resolve(fp);
-  }
-  return pathInput
+  return path.resolve(fp);
 }
 
 function pathExists(fp) {
@@ -22,10 +16,11 @@ function getExtension(fp) {
 function readFiles(fp) {
   return new Promise((resolve, reject) => {
     fs.readFile(fp, 'utf8', (err, data) => {
-      if (err) {
-        reject(err);
-      } else{
+      const fileExtension = getExtension(fp);
+      if (fileExtension === '.md') {
         resolve(getLinks(data, fp));
+      } else{
+        reject('Not Markdown file.')
       }
     });
   });
