@@ -19,8 +19,8 @@ function readFiles(fp) {
       const fileExtension = getExtension(fp);
       if (fileExtension === '.md') {
         resolve(getLinks(data, fp));
-      } else{
-        reject('Not Markdown file.')
+      } else {
+        reject(new Error ('Not Markdown file.'))
       }
     });
   });
