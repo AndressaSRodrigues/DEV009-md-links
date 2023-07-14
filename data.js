@@ -7,30 +7,20 @@ function checkAbsolute(filePath) {
 }
 
 function pathExists(filePath) {
-  return fs.existsSync(filePath);
+  return fs.existsSync(filePath)
 }
 
 function getExtension(filePath) {
   return path.extname(filePath);
 }
 
-function readFiles(filePath, validate) {
+function readFiles(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
-      
       const fileExtension = getExtension(filePath);
       if (fileExtension === '.md') {
-
-        const links = getLinks(data, filePath);
-
-        if (validate === true) {
-          validateLinks(links)
-          .then(links => resolve(links));
+        resolve(getLinks(data, filePath));
         } else {
-          resolve(links);
-        }
-
-      } else {
         reject(new Error ('Not Markdown file.'))
       }
     });
@@ -49,23 +39,24 @@ function getLinks(data, filePath) {
   }
 
   return links;
-
 }
 
 function validateLinks(links) {
   const validatePromises = links.map(link =>{
-    return axios.head(link.href)
+    return axios.get(link.href)
     .then((response)=> {
       return {
         text: link.text,
-        url: link.href,
+        href: link.href,
+        file: link.file,
         status: response.status,
         statusText: response.statusText
       }
     }).catch((error) => {
       return {
         text: link.text,
-        url: link.href,
+        href: link.href,
+        file: link.file,
         status: error.response.status,
         statusText: 'Fail'
       }
@@ -75,4 +66,14 @@ function validateLinks(links) {
   return Promise.all(validatePromises)
 }
 
-module.exports = { checkAbsolute, pathExists, getExtension, readFiles }
+module.exports = { checkAbsolute, pathExists, getExtension, readFiles, validateLinks }
+
+/*
+status: error.response.status = 404
+status: error.status = undefined
+In the axios library, when a request fails, the error object returned does not have a status property. 
+Instead, it has a response property, which contains the HTTP response details including the status property.
+
+So, when you access error.response.status, you are correctly retrieving the HTTP status code (e.g., 404) from the response object. 
+However, when you access error.status, it returns undefined because the error object itself does not have a status property.
+*/
