@@ -101,9 +101,8 @@ describe('getContent', () => {
     ]))
   });
 
-  test('throw an error for an empty directory', () => {
+  it('throw an error for an empty directory', () => {
     expect(() => getContent('empty')).toThrowError('The directory is empty');
   });
-  
   
 });

@@ -1,4 +1,4 @@
-const { checkAbsolute, pathExists, readFiles, validateLinks, getContent } = require('./data');
+const { checkAbsolute, pathExists, validateLinks, getContent } = require('./data');
 
 function mdLinks(filePath, validate = false) {
   return new Promise((resolve, reject) => {

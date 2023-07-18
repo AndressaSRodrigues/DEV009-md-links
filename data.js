@@ -17,27 +17,31 @@ function fileExtension(filePath) {
 function getContent(filePath) {
   const isDirectory = fs.statSync(filePath).isDirectory();
 
-  if (isDirectory) {
-    const files = readPath(filePath);
-    const allFiles = files.map(file => readFiles(file));
-    if (allFiles.length === 0) {
+  if (isDirectory) { //check if it is a directory
+    const files = readPath(filePath); //get each file in the directory
+    const allFiles = files.map(file => readFiles(file)); //reads each file found
+    if (allFiles.length === 0) { //if the directory is empty it throws an error
       throw new Error ('The directory is empty')
-    } return Promise.all(allFiles).then((links) => [].concat(...links));
-  } return readFiles(filePath);
-
+    } 
+    return Promise.all(allFiles)
+    .then((links) => links.flat());//returns a promise with the links in each file, then if returns a single array with all elements(links)
+  } 
+  return readFiles(filePath); //if the path is a file, it straight calls readFiles
 }
+
+//The flat() method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
 
 function readPath(filePath){
   const allFiles = [];
-	const files = fs.readdirSync(filePath);
+	const files = fs.readdirSync(filePath); //read each file in the directory
 	files.forEach(file => {
-    const fullPath = path.join(filePath, file);
+    const fullPath = path.join(filePath, file); //joins each path (folder + file name)
 		const stat = fs.statSync(fullPath);
-		if (stat.isDirectory()) {
-			const sub = readPath(fullPath);
-      allFiles.push(...sub);
-		} else if (fileExtension(fullPath) === '.md') {
-			allFiles.push(fullPath);
+		if (stat.isDirectory()){ //checks if the content of a directory is a file or another directory
+			const sub = readPath(fullPath); //reads the subdirectory (recursive)
+      allFiles.push(...sub); //adds the files in this *new* directory in the array
+		} else if (fileExtension(fullPath) === '.md') { //if the content of the directory is a file it checks if it is an md
+			allFiles.push(fullPath); //pushes the files into the allFiles array
 		}
 	});
 	return allFiles
