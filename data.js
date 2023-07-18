@@ -10,6 +10,10 @@ function pathExists(filePath) {
   return fs.existsSync(filePath)
 }
 
+function fileExtension(filePath) {
+  return path.extname(filePath)
+}
+
 function getContent(filePath) {
   const isDirectory = fs.statSync(filePath).isDirectory();
 
@@ -32,7 +36,7 @@ function readPath(filePath){
 		if (stat.isDirectory()) {
 			const sub = readPath(fullPath);
       allFiles.push(...sub);
-		} else {
+		} else if (fileExtension(fullPath) === '.md') {
 			allFiles.push(fullPath);
 		}
 	});
@@ -42,8 +46,7 @@ function readPath(filePath){
 function readFiles(filePath) {
   return new Promise((resolve, reject) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
-      const fileExtension = path.extname(filePath);
-      if (fileExtension === '.md') {
+      if (fileExtension(filePath) === '.md') {
         resolve(getLinks(data, filePath));
         } else {
         reject(new Error ('Not Markdown file.'))
