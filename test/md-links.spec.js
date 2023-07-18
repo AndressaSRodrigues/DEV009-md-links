@@ -28,7 +28,7 @@ it('should be a function that resolves a promise', () => {
     ]))
   })
 
-  it('should return an array with the links in an md file', () => {
+  it('should return an array with the links in an md file and its status after validating them', () => {
     return expect(mdLinks(path, true)).resolves.toEqual(expect.arrayContaining([
       expect.objectContaining({
         href: expect.any(String),
@@ -75,4 +75,4 @@ describe('readFiles', () => {
     return expect(readFiles('testing_files/testing.html')).rejects.toThrowError('Not Markdown file.');
   })
   
-  });
+});

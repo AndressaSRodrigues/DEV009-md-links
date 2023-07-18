@@ -1,10 +1,10 @@
 const { mdLinks } = require('./index');
 
-const path = 'testing_files/testing-links.md';
+const pathDir = 'testing_files';
 const noLinks = 'testing_files/test-nolinks.md';
 const projectReadMe = 'README.md'
 
-mdLinks(path, true)
+mdLinks(pathDir, true)
   .then((links) => {
     console.log(links);
   })
