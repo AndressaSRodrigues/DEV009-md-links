@@ -12,15 +12,15 @@ function pathExists(filePath) {
 
 function getContent(filePath) {
   const isDirectory = fs.statSync(filePath).isDirectory();
-  const isFile = fs.statSync(filePath).isFile();
 
   if (isDirectory) {
     const files = readPath(filePath);
     const allFiles = files.map(file => readFiles(file));
-    return Promise.all(allFiles).then((links) => [].concat(...links));
-  } else if (isFile) {
-    return readFiles(filePath);
-  }
+    if (allFiles.length === 0) {
+      throw new Error ('The directory is empty')
+    } return Promise.all(allFiles).then((links) => [].concat(...links));
+  } return readFiles(filePath);
+
 }
 
 function readPath(filePath){
@@ -82,7 +82,7 @@ function validateLinks(links) {
         text: link.text,
         href: link.href,
         file: link.file,
-        status: error.response ? error.response.status : 'no response',
+        status: error.response.status, //status: error.response ? error.response.status : 'no response'
         statusText: 'Fail'
       }
     })
@@ -91,4 +91,4 @@ function validateLinks(links) {
   return Promise.all(validatePromises)
 }
 
-module.exports = { checkAbsolute, pathExists, readFiles, validateLinks, getContent }
+module.exports = { checkAbsolute, pathExists, readPath, readFiles, validateLinks, getContent }

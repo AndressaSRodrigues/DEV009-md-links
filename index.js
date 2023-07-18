@@ -23,9 +23,9 @@ function mdLinks(filePath, validate = false) {
         }
         return;
       })
-/*  .catch((error) => {
+  /*.catch((error) => {
         reject(new Error('There was a problem reading the file.'))
-      }) */
+      })*/
   });
 }
 

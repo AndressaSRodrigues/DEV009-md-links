@@ -1,4 +1,4 @@
-const { readFiles, validateLinks } = require('../data.js');
+const { readFiles, validateLinks, readPath, getContent } = require('../data.js');
 const { mdLinks } = require('../index.js');
 const path = 'testing_files\\testing-links.md';
 const noLinks = 'testing_files\\test-nolinks.md';
@@ -63,7 +63,7 @@ it('should be a function that resolves a promise', () => {
           status: 404,
           statusText: 'Fail',
         },
-      ]);
+      ])
     })
   });
 
@@ -74,5 +74,36 @@ describe('readFiles', () => {
   it('should throw an error if the file is not .md', () => {
     return expect(readFiles('testing_files/testing.html')).rejects.toThrowError('Not Markdown file.');
   })
+  
+});
+
+describe('readPath', () => {
+
+  it('return an array with the files in a directory', () => {
+    expect(readPath('testing_files')).toEqual([
+      "testing_files\\test-nolinks.md",
+      "testing_files\\testing-links.md",
+      "testing_files\\test_dir\\testing_files_dir.md"
+    ]);
+});
+
+});
+
+describe('getContent', () => {
+
+  it('return an array with all the links in all files in a directory', () => {
+    return expect(getContent('testing_files')).resolves.toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        href: expect.any(String),
+        text: expect.any(String),
+        file: expect.any(String),
+      }),
+    ]))
+  });
+
+  test('throw an error for an empty directory', () => {
+    expect(() => getContent('empty')).toThrowError('The directory is empty');
+  });
+  
   
 });
