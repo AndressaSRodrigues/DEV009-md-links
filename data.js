@@ -32,19 +32,19 @@ function getContent(filePath) {
 //The flat() method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
 
 function readPath(filePath){
-  const allFiles = [];
+  const arrayAllPaths = [];
 	const files = fs.readdirSync(filePath); //read each file in the directory
 	files.forEach(file => {
     const fullPath = path.join(filePath, file); //joins each path (folder + file name)
 		const stat = fs.statSync(fullPath);
 		if (stat.isDirectory()){ //checks if the content of a directory is a file or another directory
 			const sub = readPath(fullPath); //reads the subdirectory (recursive)
-      allFiles.push(...sub); //adds the files in this *new* directory in the array
+      arrayAllPaths.push(...sub); //adds the files in this *new* directory in the array
 		} else if (fileExtension(fullPath) === '.md') { //if the content of the directory is a file it checks if it is an md
-			allFiles.push(fullPath); //pushes the files into the allFiles array
+			arrayAllPaths.push(fullPath); //pushes the files into the allFiles array
 		}
 	});
-	return allFiles
+	return arrayAllPaths
 }
 
 function readFiles(filePath) {
@@ -98,4 +98,19 @@ function validateLinks(links) {
   return Promise.all(validatePromises)
 }
 
-module.exports = { checkAbsolute, pathExists, readPath, readFiles, validateLinks, getContent }
+function stats(arr) {
+  return {
+      'Total': arr.length,
+      'Unique': new Set(arr.map((links) => links.href)).size
+  }
+}
+
+function statsValidate(arr) {
+  return {
+      'Total': arr.length,
+      'Unique': new Set(arr.map((link) => link.href)).size,
+      'Broken': arr.filter((link) => link.statusText === 'Fail').length,
+  }
+}
+
+module.exports = { checkAbsolute, pathExists, readPath, readFiles, validateLinks, getContent, stats, statsValidate }

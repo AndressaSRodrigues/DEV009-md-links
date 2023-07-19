@@ -1,13 +1,19 @@
 #!/usr/bin/env node
 const { mdLinks } = require('./index');
+const { stats, statsValidate } = require('./data')
+const process = require('node:process');
+const path = process.argv[2];
+const options = process.argv;
 
-const pathDir = 'testing_files';
-//const pathFile = 'testing_files\\testing-links.md';
-//const projectReadMe = 'README.md'
-
-mdLinks(pathDir, true)
+mdLinks(path, options)
   .then((links) => {
-    console.log(links);
+    if (options.includes('--validate') && options.includes('--stats')) {
+      console.log(statsValidate(links));
+    } else if (options.includes('--stats')){
+      console.log(stats(links));
+    } else {
+      console.log(links);
+    }
   })
   .catch((error) => {
     console.error(error);
