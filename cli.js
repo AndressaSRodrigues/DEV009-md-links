@@ -5,7 +5,7 @@ const pathDir = 'testing_files';
 const pathFile = 'testing_files\\testing-links.md';
 const projectReadMe = 'README.md'
 
-mdLinks(pathDir, true)
+mdLinks(pathFile, true)
   .then((links) => {
     console.log(links);
   })
