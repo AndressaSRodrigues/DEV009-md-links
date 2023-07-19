@@ -15,7 +15,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "eslint": "eslint --ext .js ."
   },
   "author": "Andressa Rodrigues",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "mdlinks": "cli.js"
   },
   "devDependencies": {
+    "eslint": "^8.45.0",
     "jest": "^29.6.1"
   },
   "dependencies": {
