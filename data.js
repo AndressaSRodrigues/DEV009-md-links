@@ -109,6 +109,7 @@ function statsValidate(arr) {
   return {
       'Total': arr.length,
       'Unique': new Set(arr.map((link) => link.href)).size,
+      'OK': arr.filter((link) => link.statusText === 'OK').length,
       'Broken': arr.filter((link) => link.statusText === 'Fail').length
   }
 }
