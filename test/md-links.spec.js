@@ -1,7 +1,8 @@
-const { readFiles, validateLinks, readPath, getContent } = require('../data.js');
+const { readFiles, validateLinks, readPath, getContent, stats, statsValidate } = require('../data.js');
 const { mdLinks } = require('../index.js');
 const path = 'testing_files\\testing-links.md';
 const noLinks = 'testing_files\\test-nolinks.md';
+const options = '--validate';
 /* jest.mock('axios'); */
 
 describe('mdLinks', () => {
@@ -24,6 +25,18 @@ it('should be a function that resolves a promise', () => {
         href: expect.any(String),
         text: expect.any(String),
         file: expect.any(String),
+      }),
+    ]))
+  })
+
+  it('should return an array with the links in an md file', () => {
+    return expect(mdLinks(path, options)).resolves.toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        href: expect.any(String),
+        text: expect.any(String),
+        file: expect.any(String),
+        status: expect.any(Number),
+        statusText: expect.any(String)
       }),
     ]))
   })
@@ -93,4 +106,23 @@ describe('getContent', () => {
     expect(() => getContent('empty')).toThrowError('The directory is empty');
   });
   
+});
+
+describe('stats and statsValidate', () => {
+  const linksArray = [
+    { href: 'link1', statusText: 'OK' },
+    { href: 'link1', statusText: 'OK' },
+    { href: 'link2', statusText: 'OK' },
+    { href: 'link3', statusText: 'Fail' },
+    { href: 'link4', statusText: 'Fail' }
+  ];
+
+  it('returns the number of total links and the number of unique links', () => {
+    expect(stats(linksArray)).toEqual({ Total: 5, Unique: 4 });
+  });
+
+  it('returns the number of total links and the number of unique links', () => {
+    expect(statsValidate(linksArray)).toEqual({ Total: 5, Unique: 4, OK: 3, Broken: 2 });
+  });
+
 });

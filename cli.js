@@ -23,7 +23,7 @@ if (path && options.length === 0) {
       } else if (options.includes('--validate')) {
         console.log(links)
       } else {
-        console.log('Invalid option. Please use --stats or --validate.')
+        console.log(`${options} is an invalid option. Please use --stats or --validate.`)
       }
     })
     .catch((error) => {
