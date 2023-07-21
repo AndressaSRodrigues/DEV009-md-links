@@ -1,5 +1,12 @@
 const path = require('path');
 const fs = require('fs');
+const gradient = require('gradient-string');
+const colors = {
+  1: gradient('#FFA4EC', '#E047B6'),
+  2: gradient('#E047B6', '#FFA4EC'),
+  3: gradient('#2BA0C9', '#FFA4EC'),
+  4: gradient('#2E348A', '#2BA0C9'),
+};
 const axios = require('axios').default;
 
 function checkAbsolute(filePath) {
@@ -21,7 +28,7 @@ function getContent(filePath) {
     const files = readPath(filePath); //get each file in the directory
     const allFiles = files.map(file => readFiles(file)); //reads each file found
     if (allFiles.length === 0) { //if the directory is empty it throws an error
-      throw new Error ('The directory is empty')
+      throw new Error (colors[4]('The directory is empty.'))
     } 
     return Promise.all(allFiles)
     .then((links) => links.flat());//returns a promise with the links in each file, then if returns a single array with all elements(links)
@@ -53,7 +60,7 @@ function readFiles(filePath) {
       if (fileExtension(filePath) === '.md') {
         resolve(getLinks(data, filePath));
         } else {
-        reject(new Error ('Not Markdown file.'))
+        reject(new Error (colors[4]('Not Markdown. Please, enter a markdown file (.md).')))
       }
     });
   });

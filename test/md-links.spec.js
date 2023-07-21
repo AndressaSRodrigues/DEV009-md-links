@@ -1,5 +1,12 @@
 const { readFiles, validateLinks, readPath, getContent, stats, statsValidate } = require('../data.js');
 const { mdLinks } = require('../index.js');
+const gradient = require('gradient-string');
+const colors = {
+  1: gradient('#FFA4EC', '#E047B6'),
+  2: gradient('#E047B6', '#FFA4EC'),
+  3: gradient('#2BA0C9', '#FFA4EC'),
+  4: gradient('#2E348A', '#2BA0C9'),
+};
 const path = 'testing_files\\testing-links.md';
 const noLinks = 'testing_files\\test-nolinks.md';
 const options = '--validate';
@@ -12,11 +19,11 @@ it('should be a function that resolves a promise', () => {
   })
 
   it('should return an error if the path does not exist', () => {
-    return expect(mdLinks('notAFile.md')).rejects.toThrowError('Path does not exist');
+    return expect(mdLinks('notAFile.md')).rejects.toThrowError(colors[1]('This path does not exist, enter a valid path.'));
   })
 
   it('should throw an error message if there are no links in the file', () => {
-    return expect(mdLinks(noLinks)).rejects.toThrowError('No links in the file.');
+    return expect(mdLinks(noLinks)).rejects.toThrowError(colors[1]('There are no links in the file.'));
   })
 
   it('should return an array with the links in an md file', () => {
@@ -73,7 +80,7 @@ it('should be a function that resolves a promise', () => {
 describe('readFiles', () => {
 
   it('should throw an error if the file is not .md', () => {
-    return expect(readFiles('testing_files/testing.html')).rejects.toThrowError('Not Markdown file.');
+    return expect(readFiles('testing_files/testing.html')).rejects.toThrowError(colors[4]('Not Markdown. Please, enter a markdown file (.md).'));
   })
   
 });
@@ -103,7 +110,7 @@ describe('getContent', () => {
   });
 
   it('throw an error for an empty directory', () => {
-    expect(() => getContent('empty')).toThrowError('The directory is empty');
+    expect(() => getContent('empty')).toThrowError(colors[4]('The directory is empty.'));
   });
   
 });
