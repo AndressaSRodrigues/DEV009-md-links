@@ -1,6 +1,6 @@
 const { checkAbsolute, pathExists, validateLinks, getContent } = require('./data');
 
-function mdLinks(filePath, options = false) {
+function mdLinks(filePath, options) {
   return new Promise((resolve, reject) => {
     
     const absolutePath = checkAbsolute(filePath);
@@ -13,7 +13,7 @@ function mdLinks(filePath, options = false) {
     getContent(absolutePath)
     .then((links) => {
       if (links.length > 0) {
-        if (options.validate === true) {
+        if (options) {
           resolve(validateLinks(links));
         } else {
           resolve(links);
@@ -22,9 +22,6 @@ function mdLinks(filePath, options = false) {
           reject(new Error('No links in the file.'))
         }
         return;
-      })
-    .catch(() => {
-        reject(new Error('There was a problem reading the file.'))
       })
   });
 }

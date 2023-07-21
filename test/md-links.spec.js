@@ -19,23 +19,11 @@ it('should be a function that resolves a promise', () => {
   })
 
   it('should return an array with the links in an md file', () => {
-    return expect(mdLinks(path, false)).resolves.toEqual(expect.arrayContaining([
+    return expect(mdLinks(path)).resolves.toEqual(expect.arrayContaining([
       expect.objectContaining({
         href: expect.any(String),
         text: expect.any(String),
         file: expect.any(String),
-      }),
-    ]))
-  })
-
-  it('should return an array with the links in an md file and its status after validating them', () => {
-    return expect(mdLinks(path, true)).resolves.toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        href: expect.any(String),
-        text: expect.any(String),
-        file: expect.any(String),
-        status: expect.any(Number),
-        statusText: expect.any(String)
       }),
     ]))
   })

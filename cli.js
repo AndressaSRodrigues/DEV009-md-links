@@ -3,32 +3,30 @@ const { mdLinks } = require('./index');
 const { stats, statsValidate } = require('./data')
 const process = require('node:process');
 const path = process.argv[2];
-const options = {
-  validate: process.argv.includes('--validate'),
-  stats: process.argv.includes('--stats'),
-  statsValidate: process.argv.includes('--validate') && process.argv.includes('--stats'),
-};
+const options = process.argv.slice(3); // Get options only, excluding the path
 
-if (path && options === undefined) {
+if (path && options.length === 0) {
   mdLinks(path)
-  .then((links) => {
+    .then((links) => {
       console.log(links)
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 } else {
   mdLinks(path, options)
-  .then((links) => {
-    if (options.statsValidate){
-      console.log(statsValidate(links))
-    } else if (options.stats) {
-      console.log(stats(links))
-    } else {
-      console.log(links)
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    .then((links) => {
+      if (options.includes('--stats') && options.includes('--validate')){
+        console.log(statsValidate(links))
+      } else if (options.includes('--stats')) {
+        console.log(stats(links))
+      } else if (options.includes('--validate')) {
+        console.log(links)
+      } else {
+        console.log('Invalid option. Please use --stats or --validate.')
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
