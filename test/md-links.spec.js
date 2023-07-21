@@ -19,11 +19,11 @@ it('should be a function that resolves a promise', () => {
   })
 
   it('should return an error if the path does not exist', () => {
-    return expect(mdLinks('notAFile.md')).rejects.toThrowError(colors[1]('This path does not exist, enter a valid path.'));
+    return expect(mdLinks('notAFile.md')).rejects.toEqual(colors[1]('This path does not exist, enter a valid path.'));
   })
 
   it('should throw an error message if there are no links in the file', () => {
-    return expect(mdLinks(noLinks)).rejects.toThrowError(colors[1]('There are no links in the file.'));
+    return expect(mdLinks(noLinks)).rejects.toEqual(colors[1]('The file is empty or there are no links to validate.'));
   })
 
   it('should return an array with the links in an md file', () => {
@@ -80,7 +80,7 @@ it('should be a function that resolves a promise', () => {
 describe('readFiles', () => {
 
   it('should throw an error if the file is not .md', () => {
-    return expect(readFiles('testing_files/testing.html')).rejects.toThrowError(colors[4]('Not Markdown. Please, enter a markdown file (.md).'));
+    return expect(readFiles('testing_files/testing.html')).rejects.toBe(colors[4]('Not Markdown. Please, enter a markdown file (.md).'));
   })
   
 });
@@ -108,11 +108,7 @@ describe('getContent', () => {
       }),
     ]))
   });
-
-  it('throw an error for an empty directory', () => {
-    expect(() => getContent('empty')).toThrowError(colors[4]('The directory is empty.'));
-  });
-  
+ 
 });
 
 describe('stats and statsValidate', () => {

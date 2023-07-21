@@ -13,7 +13,7 @@ function mdLinks(filePath, options) {
     const absolutePath = checkAbsolute(filePath);
 
     if (!pathExists(absolutePath)) {
-      reject(new Error(colors[1]('This path does not exist, enter a valid path.')));
+      reject(colors[1]('This path does not exist, enter a valid path.'));
       return;
     } 
 
@@ -26,10 +26,13 @@ function mdLinks(filePath, options) {
           resolve(links);
         }
       } else {
-          reject(new Error(colors[1]('There are no links in the file.')));
+          reject(colors[1]('The file is empty or there are no links to validate.'));
         }
         return;
       })
+      .catch((error) => {
+        console.error(error);
+      });
   });
 }
 

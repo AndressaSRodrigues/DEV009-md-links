@@ -24,31 +24,26 @@ function fileExtension(filePath) {
 function getContent(filePath) {
   const isDirectory = fs.statSync(filePath).isDirectory();
 
-  if (isDirectory) { //check if it is a directory
-    const files = readPath(filePath); //get each file in the directory
-    const allFiles = files.map(file => readFiles(file)); //reads each file found
-    if (allFiles.length === 0) { //if the directory is empty it throws an error
-      throw new Error (colors[4]('The directory is empty.'))
-    } 
+  if (isDirectory) { 
+    const files = readPath(filePath); 
+    const allFiles = files.map(file => readFiles(file)); 
     return Promise.all(allFiles)
-    .then((links) => links.flat());//returns a promise with the links in each file, then if returns a single array with all elements(links)
+    .then((links) => links.flat());
   } 
-  return readFiles(filePath); //if the path is a file, it straight calls readFiles
+  return readFiles(filePath);
 }
-
-//The flat() method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
 
 function readPath(filePath){
   const arrayAllPaths = [];
-	const files = fs.readdirSync(filePath); //read each file in the directory
+	const files = fs.readdirSync(filePath);
 	files.forEach(file => {
-    const fullPath = path.join(filePath, file); //joins each path (folder + file name)
+    const fullPath = path.join(filePath, file);
 		const stat = fs.statSync(fullPath);
-		if (stat.isDirectory()){ //checks if the content of a directory is a file or another directory
-			const sub = readPath(fullPath); //reads the subdirectory (recursive)
-      arrayAllPaths.push(...sub); //adds the files in this *new* directory in the array
-		} else if (fileExtension(fullPath) === '.md') { //if the content of the directory is a file it checks if it is an md
-			arrayAllPaths.push(fullPath); //pushes the files into the allFiles array
+		if (stat.isDirectory()){
+			const sub = readPath(fullPath); 
+      arrayAllPaths.push(...sub);
+		} else if (fileExtension(fullPath) === '.md') {
+			arrayAllPaths.push(fullPath);
 		}
 	});
 	return arrayAllPaths
@@ -60,7 +55,7 @@ function readFiles(filePath) {
       if (fileExtension(filePath) === '.md') {
         resolve(getLinks(data, filePath));
         } else {
-        reject(new Error (colors[4]('Not Markdown. Please, enter a markdown file (.md).')))
+        reject(colors[4]('Not Markdown. Please, enter a markdown file (.md).'))
       }
     });
   });
