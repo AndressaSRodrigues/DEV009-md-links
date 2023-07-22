@@ -27,9 +27,9 @@ if (!path) {
   mdLinks(path, options)
     .then((links) => {
       if (options.includes('--stats') && options.includes('--validate')){
-        console.log(colors[3]('Statistics for the validation:'),statsValidate(links))
+        console.log(colors[3]('Validation statistics::'),statsValidate(links))
       } else if (options.includes('--stats')) {
-        console.log(colors[3]('Statistics for the links found:'), stats(links))
+        console.log(colors[3]('Number of links found:'), stats(links))
       } else if (options.includes('--validate')) {
         console.log(colors[3]('The following links were found and validated:'), links)
       } else {
