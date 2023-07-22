@@ -68,19 +68,20 @@ Replace `path/to/markdown/files` with the relative or absolute path to the direc
 Input:
 
 ```bash
-mdlinks testing_files.md
+mdlinks testing_links.md
 ```
 
 Output:
 
 ```bash
-mdlinks testing_files.md
+mdlinks testing_links.md
 The following links were found:[
   {
     href: 'https://nodejs.org/',
     text: 'Node.js',
     file: 'C:\\Users\\example\\testing_files\\testing-links.md'
-  }]
+  }
+]
 ```
 
 * To find and validate all links:
@@ -88,7 +89,7 @@ The following links were found:[
 Input:
 
 ```bash
-mdlinks path/to/your-directory --validate
+mdlinks testing_files --validate
 ```
 
 Output:
@@ -102,7 +103,8 @@ The following links were found and validated:[
     file: 'C:\\Users\\example\\testing_files\\testing-links.md',
     status: 200,
     statusText: 'OK'
-  }]
+  }
+]
 ```
 
 * To get statistics:
@@ -110,7 +112,7 @@ The following links were found and validated:[
 Input:
 
 ```bash
-mdlinks path/to/your-directory --stats
+mdlinks testing_files --stats
 ```
 
 Output:
@@ -125,7 +127,7 @@ Input:
 
 ```bash
 
-mdlinks path/to/your-directory --stats --validate
+mdlinks testing_files --stats --validate
 ```
 
 Output:
