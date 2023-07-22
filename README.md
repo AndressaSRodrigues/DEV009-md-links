@@ -1,6 +1,6 @@
-![mdlinks](C:\Users\deehr\Documents\GitHub\DEV009-md-links\assets\mdlinks.png)
+# Md-Links
 
-#### Table of contents
+## Table of contents
 
 * [1. Description](#1-description)
 * [2. Features](#2-features)
@@ -11,6 +11,8 @@
 * [7. Developers](#7-developers)
 
 ## 1. Description
+
+![mdlinks](assets\mdlinks.png)
 
 `mdlinks` is an npm package designed to parse Markdown files, extract links, and provide validation for those links. It can be used to automate link checking within your Markdown documents, ensuring that all links are valid and not broken.
 
@@ -25,8 +27,7 @@
 
 This flowchart illustrates the step-by-step process that occurs once a path is provided to mdlinks.
 
-![flowchart](C:\Users\deehr\Documents\GitHub\DEV009-md-links\assets\flowchart.png)
-
+![flowchart](assets\flowchart.png)
 
 ## 4. Installation
 
@@ -45,9 +46,9 @@ To use it as a local dependency in your project, run:
 
 To run mdlinks from the command line, use the following syntax:
 
-```
+``
 mdlinks path/to/markdown/files [options]
-```
+``
 
 Replace `path/to/markdown/files` with the relative or absolute path to the directory or Markdown file you want to analyze.
 **Important!** A path must be provided.
@@ -65,11 +66,14 @@ Replace `path/to/markdown/files` with the relative or absolute path to the direc
 * To find all links:
 
 Input:
-```
+
+```bash
 mdlinks testing_files.md
 ```
+
 Output:
-```
+
+```bash
 mdlinks testing_files.md
 The following links were found:[
   {
@@ -83,12 +87,13 @@ The following links were found:[
 
 Input:
 
-```
+```bash
 mdlinks path/to/your-directory --validate
 ```
 
 Output:
-```
+
+```bash
 mdlinks testing_files
 The following links were found and validated:[
   {
@@ -104,12 +109,13 @@ The following links were found and validated:[
 
 Input:
 
-```
+```bash
 mdlinks path/to/your-directory --stats
 ```
 
 Output:
-```
+
+```bash
 Number of links found: { Total: 8, Unique: 5 }
 ```
 
@@ -117,12 +123,14 @@ Number of links found: { Total: 8, Unique: 5 }
 
 Input:
 
-```
+```bash
+
 mdlinks path/to/your-directory --stats --validate
 ```
+
 Output:
 
-```
+```bash
 Validation statistics: { Total: 8, Unique: 5, OK: 5, Broken: 3 }
 ```
 
@@ -130,10 +138,12 @@ Validation statistics: { Total: 8, Unique: 5, OK: 5, Broken: 3 }
 
 This project follows an agile development methodology and leverages GitHub's project boards for efficient organization and progress tracking.
 
-#### Milestones
+### Milestones
+
 The project has been divided into four different milestones, each representing a significant phase of development. Each milestone comprises specific tasks that contribute to completing different parts of the project. For effectiviness, we used GitHub issues for each individual task in a milestone.
 
-#### GitHub Project Board
+### GitHub Project Board
+
 During the project's development, we utilized GitHub's project board to manage tasks and track progress. The board is divided into several columns representing different stages of development:
 
 **To Do**: This column contains all the tasks that are planned but not yet started.
@@ -144,7 +154,7 @@ During the project's development, we utilized GitHub's project board to manage t
 
 Here's an example of our board:
 
-![project](C:\Users\deehr\Documents\GitHub\DEV009-md-links\assets\mdlinks-project.png)
+![project](assets\mdlinks-project.png)
 
 ## 7. Developers
 
