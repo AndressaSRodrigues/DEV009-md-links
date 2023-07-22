@@ -1,4 +1,4 @@
-![mdlinks](assets\mdlinks.png)
+![mdlinks](C:\Users\deehr\Documents\GitHub\DEV009-md-links\assets\mdlinks.png)
 
 #### Table of contents
 
@@ -25,7 +25,7 @@
 
 This flowchart illustrates the step-by-step process that occurs once a path is provided to mdlinks.
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2Fp7WeGj3Zu9TFFOSzW170EW%2FDiagrama-de-Flujo%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DCWc4UNJI21MsLyuK-1" allowfullscreen></iframe>
+![flowchart](C:\Users\deehr\Documents\GitHub\DEV009-md-links\assets\flowchart.png)
 
 
 ## 4. Installation
@@ -45,7 +45,7 @@ To use it as a local dependency in your project, run:
 
 To run mdlinks from the command line, use the following syntax:
 
-```js
+```
 mdlinks path/to/markdown/files [options]
 ```
 
@@ -144,7 +144,7 @@ During the project's development, we utilized GitHub's project board to manage t
 
 Here's an example of our board:
 
-![project](assets\mdlinks-project.png)
+![project](C:\Users\deehr\Documents\GitHub\DEV009-md-links\assets\mdlinks-project.png)
 
 ## 7. Developers
 
@@ -152,4 +152,4 @@ This project was developed by Andressa Rodrigues.
 
 This project was developed as part of the curriculum for the Laboratoria bootcamp. Special thanks to the instructors and mentors at Laboratoria for their guidance and support during the development process, and to my colleagues who helped me throughout this challenge.
 
-Thank you for using **<span style="color:#E047B6;">mdlinks</span>**. We hope this package simplifies the process of finding and validating links in your Markdown files. Happy coding!
+Thank you for using **mdlinks**. We hope this package simplifies the process of finding and validating links in your Markdown files. Happy coding!
