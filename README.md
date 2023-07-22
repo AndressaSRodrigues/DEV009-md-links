@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets\mdlinks.png" width="400px" alt="logo">
+  <img src="assets\mdlinks.png" width="400px" alt="400px">
 </p>
 
 ## 1. Description
