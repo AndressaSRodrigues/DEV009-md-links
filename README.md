@@ -1,4 +1,6 @@
-![mdlinks](assets/mdlinks.png)
+<p align="center">
+  <img src="assets\mdlinks.png" width="400px" alt="logo">
+</p>
 
 ## 1. Description
 
