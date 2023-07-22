@@ -1,18 +1,6 @@
-# Md-Links
-
-## Table of contents
-
-* [1. Description](#1-description)
-* [2. Features](#2-features)
-* [3. Flowchart](#3-flowchart)
-* [4. Installation](#4-installation)
-* [5. Usage](#5-usage)
-* [6. Project Planning and Organization](#6-project-planning-and-organization)
-* [7. Developers](#7-developers)
+![mdlinks](assets/mdlinks.png)
 
 ## 1. Description
-
-![mdlinks](assets/mdlinks.png)
 
 `mdlinks` is an npm package designed to parse Markdown files, extract links, and provide validation for those links. It can be used to automate link checking within your Markdown documents, ensuring that all links are valid and not broken.
 
