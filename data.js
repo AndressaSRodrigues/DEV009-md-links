@@ -1,12 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const gradient = require('gradient-string');
-const colors = {
-  1: gradient('#FFA4EC', '#E047B6'),
-  2: gradient('#E047B6', '#FFA4EC'),
-  3: gradient('#2BA0C9', '#FFA4EC'),
-  4: gradient('#2E348A', '#2BA0C9'),
-};
+const { colors } = require('./colors.js');
 const axios = require('axios').default;
 
 function checkAbsolute(filePath) {
@@ -91,7 +85,7 @@ function validateLinks(links) {
         text: link.text,
         href: link.href,
         file: link.file,
-        status: error.response.status, //status: error.response ? error.response.status : 'no response'
+        status: error.response ? error.response.status : 'no response',
         statusText: 'Fail'
       }
     })

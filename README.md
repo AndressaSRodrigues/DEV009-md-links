@@ -2,24 +2,24 @@
   <img src="assets\mdlinks.png" width="400px" alt="400px">
 </p>
 
-## 1. Description
+## Description
 
 `mdlinks` is an npm package designed to parse Markdown files, extract links, and provide validation for those links. It can be used to automate link checking within your Markdown documents, ensuring that all links are valid and not broken.
 
-## 2. Features
+## Features
 
 * Parses Markdown files to find all links contained within them.
 * Provides detailed information about each link, including the link URL, anchor text, and the file in which it was found.
 * Validates each link to check if it's alive (not broken) or dead (broken).
 * Simple and easy-to-use command-line interface (CLI).
 
-## 3. Flowchart
+## Flowchart
 
 This flowchart illustrates the step-by-step process that occurs once a path is provided to mdlinks.
 
 ![flowchart](assets/flowchart.png)
 
-## 4. Installation
+## Installation
 
 To install mdlinks globally and use it from the command line, run the following npm command:
 
@@ -30,7 +30,7 @@ To use it as a local dependency in your project, run:
 `npm install mdlinks
 `
 
-## 5. Usage
+## Usage
 
 ### Command Line Interface (CLI)
 
@@ -126,7 +126,7 @@ Output:
 Validation statistics: { Total: 8, Unique: 5, OK: 5, Broken: 3 }
 ```
 
-## 6. Project Planning and Organization
+## Project Planning and Organization
 
 This project follows an agile development methodology and leverages GitHub's project boards for efficient organization and progress tracking.
 
@@ -148,7 +148,7 @@ Here's an example of our board:
 
 ![project](assets/mdlinks-project.png)
 
-## 7. Developers
+## Developers
 
 This project was developed by Andressa Rodrigues.
 

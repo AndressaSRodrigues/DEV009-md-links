@@ -1,12 +1,6 @@
 const { readFiles, validateLinks, readPath, getContent, stats, statsValidate } = require('../data.js');
 const { mdLinks } = require('../index.js');
-const gradient = require('gradient-string');
-const colors = {
-  1: gradient('#FFA4EC', '#E047B6'),
-  2: gradient('#E047B6', '#FFA4EC'),
-  3: gradient('#2BA0C9', '#FFA4EC'),
-  4: gradient('#2E348A', '#2BA0C9'),
-};
+const { colors } = require('../colors.js');
 const path = 'testing_files\\testing-links.md';
 const noLinks = 'testing_files\\test-nolinks.md';
 const options = '--validate';
@@ -42,7 +36,7 @@ it('should be a function that resolves a promise', () => {
         href: expect.any(String),
         text: expect.any(String),
         file: expect.any(String),
-        status: expect.any(Number),
+        status: expect.anything(),
         statusText: expect.any(String)
       }),
     ]))
@@ -77,6 +71,25 @@ it('should be a function that resolves a promise', () => {
 
 });
 
+it('should handle no response', () => {
+  const links = [
+    { href: 'nonexistent-link', text: 'Nonexistent Link', file: 'nonexistent.md' },
+  ];
+
+  return validateLinks(links)
+    .then((results) => {
+      expect(results).toEqual([
+        {
+          text: 'Nonexistent Link',
+          href: 'nonexistent-link',
+          file: 'nonexistent.md',
+          status: 'no response',
+          statusText: 'Fail',
+        },
+      ]);
+    });
+});
+
 describe('readFiles', () => {
 
   it('should throw an error if the file is not .md', () => {
@@ -108,7 +121,7 @@ describe('getContent', () => {
       }),
     ]))
   });
- 
+
 });
 
 describe('stats and statsValidate', () => {

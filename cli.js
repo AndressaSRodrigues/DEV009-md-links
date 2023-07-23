@@ -1,20 +1,14 @@
 #!/usr/bin/env node
 const { mdLinks } = require('./index');
 const { stats, statsValidate } = require('./data')
-const gradient = require('gradient-string');
-const colors = {
-  1: gradient('#FFA4EC', '#E047B6'),
-  2: gradient('#E047B6', '#FFA4EC'),
-  3: gradient('#2BA0C9', '#FFA4EC'),
-  4: gradient('#2E348A', '#2BA0C9'),
-};
+const { colors } = require('./colors.js');
 const process = require('node:process');
 const path = process.argv[2];
 const options = process.argv.slice(3); // Get options only, excluding the path
 
 
 if (!path) {
-  console.log(colors[3]('You should enter a path. You can enter a path to a file or a folder.\nFor example: mdlinks path.md\nYou can also include the options --stats or --validate for further information.\nRemember mdlinks only reads markdown files.'))
+  console.log(colors[3]('You should enter a path. You can enter a path to a file or a folder.\n\nFor example: mdlinks pathtofile.md or pathtofolder\n\nYou can also include the options --stats or --validate for further information.\n\n**Remember: mdlinks only reads markdown files.**'))
 } else if (path && options.length === 0) {
   mdLinks(path)
     .then((links) => {
