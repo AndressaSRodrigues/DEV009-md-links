@@ -1,6 +1,8 @@
 const { checkAbsolute, pathExists, validateLinks, getContent } = require('./data');
 const { colors } = require('./colors.js');
+
 function mdLinks(filePath, options) {
+  
   return new Promise((resolve, reject) => {
     
     const absolutePath = checkAbsolute(filePath);
@@ -13,11 +15,7 @@ function mdLinks(filePath, options) {
     getContent(absolutePath)
     .then((links) => {
       if (links.length > 0) {
-        if (options) {
-          resolve(validateLinks(links));
-        } else {
-          resolve(links);
-        }
+        resolve(options ? validateLinks(links) : links);
       } else {
           reject(colors[1]('The file is empty or there are no links to validate.'));
         }
@@ -27,6 +25,7 @@ function mdLinks(filePath, options) {
         console.error(error);
       });
   });
+  
 }
 
 module.exports = { mdLinks };

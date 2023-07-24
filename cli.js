@@ -4,8 +4,7 @@ const { stats, statsValidate } = require('./data')
 const { colors } = require('./colors.js');
 const process = require('node:process');
 const path = process.argv[2];
-const options = process.argv.slice(3); // Get options only, excluding the path
-
+const options = process.argv.slice(3);
 
 if (!path) {
   console.log(colors[3]('You should enter a path. You can enter a path to a file or a folder.\n\nFor example: mdlinks pathtofile.md or pathtofolder\n\nYou can also include the options --stats or --validate for further information.\n\n**Remember: mdlinks only reads markdown files.**'))

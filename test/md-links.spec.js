@@ -4,7 +4,6 @@ const { colors } = require('../colors.js');
 const path = 'testing_files\\testing-links.md';
 const noLinks = 'testing_files\\test-nolinks.md';
 const options = '--validate';
-/* jest.mock('axios'); */
 
 describe('mdLinks', () => {
 

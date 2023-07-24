@@ -11,11 +11,8 @@ function pathExists(filePath) {
   return fs.existsSync(filePath)
 }
 
-function fileExtension(filePath) {
-  return path.extname(filePath)
-}
-
 function getContent(filePath) {
+  
   const isDirectory = fs.statSync(filePath).isDirectory();
 
   if (isDirectory) { 
@@ -24,35 +21,48 @@ function getContent(filePath) {
     return Promise.all(allFiles)
     .then((links) => links.flat());
   } 
+
   return readFiles(filePath);
 }
 
 function readPath(filePath){
+  
   const arrayAllPaths = [];
 	const files = fs.readdirSync(filePath);
-	files.forEach(file => {
+	
+  files.forEach(file => {
     const fullPath = path.join(filePath, file);
 		const stat = fs.statSync(fullPath);
-		if (stat.isDirectory()){
+		
+    if (stat.isDirectory()){
 			const sub = readPath(fullPath); 
       arrayAllPaths.push(...sub);
 		} else if (fileExtension(fullPath) === '.md') {
 			arrayAllPaths.push(fullPath);
 		}
+
 	});
+
 	return arrayAllPaths
 }
 
 function readFiles(filePath) {
   return new Promise((resolve, reject) => {
+
     fs.readFile(filePath, 'utf8', (err, data) => {
+
       if (fileExtension(filePath) === '.md') {
         resolve(getLinks(data, filePath));
         } else {
         reject(colors[4]('Not Markdown. Please, enter a markdown file (.md).'))
       }
+      
     });
   });
+}
+
+function fileExtension(filePath) {
+  return path.extname(filePath)
 }
 
 function getLinks(data, filePath) {
