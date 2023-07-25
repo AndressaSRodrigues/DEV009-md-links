@@ -1,6 +1,5 @@
-<p align="center">
-  <img src="assets\mdlinks.png" width="400px" alt="400px">
-</p>
+
+![mdlinks-logo](assets\mdlinks.png)
 
 ## Description
 
@@ -27,11 +26,8 @@ To install mdlinks globally and use it from the command line, run the following 
 
 To use it as a local dependency in your project, run:
 
-`npm install mdlinks`
-
-You can also install from GitHub:
-
-`npm install github:AndressaSRodrigues/DEV009-md-links`
+`npm install mdlinks
+`
 
 ## Usage
 
