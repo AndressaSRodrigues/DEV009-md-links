@@ -25,11 +25,11 @@ This flowchart illustrates the step-by-step process that occurs once a path is p
 
 To install mdlinks globally and use it from the command line, run the following npm command:
 
-`npm install -g mdlinks`
+`npm install -g mdlinks-asr` or `npm i -g mdlinks-asr`
 
 To use it as a local dependency in your project, run:
 
-`npm install mdlinks`
+`npm install mdlinks-asr` or `npm i mdlinks-asr`
 
 You can also install from GitHub:
 
