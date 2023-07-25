@@ -18,7 +18,7 @@ function getContent(filePath) {
   if (isDirectory) { 
     const files = readPath(filePath); 
     const allFiles = files.map(file => readFiles(file)); 
-    return Promise.all(allFiles)
+    return Promise.all(allFiles) //returns a promise that resolves to an array of all the results from calling readFiles on each file
     .then((links) => links.flat());
   } 
 
@@ -35,7 +35,7 @@ function readPath(filePath){
 		const stat = fs.statSync(fullPath);
 		
     if (stat.isDirectory()){
-			const sub = readPath(fullPath); 
+			const sub = readPath(fullPath); //recursividad
       arrayAllPaths.push(...sub);
 		} else if (fileExtension(fullPath) === '.md') {
 			arrayAllPaths.push(fullPath);

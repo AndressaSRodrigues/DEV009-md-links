@@ -40,6 +40,9 @@ it('should be a function that resolves a promise', () => {
       }),
     ]))
   })
+});
+
+describe('validateLinks', () => {
 
   it('should validate links', () => {
     const links = [
@@ -68,25 +71,24 @@ it('should be a function that resolves a promise', () => {
     })
   });
 
-});
+  it('should handle no response', () => {
+    const links = [
+      { href: 'nonexistent-link', text: 'Nonexistent Link', file: 'nonexistent.md' },
+      ];
 
-it('should handle no response', () => {
-  const links = [
-    { href: 'nonexistent-link', text: 'Nonexistent Link', file: 'nonexistent.md' },
-  ];
-
-  return validateLinks(links)
-    .then((results) => {
-      expect(results).toEqual([
-        {
-          text: 'Nonexistent Link',
-          href: 'nonexistent-link',
-          file: 'nonexistent.md',
-          status: 'no response',
-          statusText: 'Fail',
-        },
-      ]);
-    });
+      return validateLinks(links)
+      .then((results) => {
+        expect(results).toEqual([
+          {
+            text: 'Nonexistent Link',
+            href: 'nonexistent-link',
+            file: 'nonexistent.md',
+            status: 'no response',
+            statusText: 'Fail',
+          },
+        ]);
+      });
+  });
 });
 
 describe('readFiles', () => {
